@@ -17,43 +17,15 @@ use Illuminate\Support\Facades\Auth;
 
 //login
 Auth::routes();
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home') -> middleware('auth');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home') -> middleware('auth');
 
-
-// home
-Route::group(['middleware' => ['auth','ceklevel:user']], function (){
-
-    Route::get('/index', function () {
-        return view('index');
-    });
-
-    //laporan
-Route::resource('/blogs', \App\Http\Controllers\BlogController::class);
-
-Route::get('/jawa-timur', function () {
-    return view('pages/laporan/jawa-timur');
+//home
+Route::get('/', function () {
+    return view('index');
 });
 
-Route::get('/jawa-barat', function () {
-    return view('pages/laporan/jawa-barat');
-});
-
-Route::get('/jawa-tengah', function () {
-    return view('pages/laporan/jawa-tengah');
-});
-
-Route::get('/kalimantan', function () {
-    return view('pages/laporan/kalimantan');
-});
-
-Route::get('/sumatera', function () {
-    return view('pages/laporan/sumatera
-    ');
-});
-
-Route::get('/sulawesi', function () {
-    return view('pages/laporan/sulawesi');
+Route::get('/index', function () {
+    return view('index');
 });
 
 //berita
@@ -105,6 +77,39 @@ Route::get('/tanah-longsor-terparah', function () {
     return view('pages/berita/tanah-longsor-terparah');
 });
 
+
+
+
+// user
+Route::group(['middleware' => ['auth','ceklevel:user']], function (){
+
+    //laporan
+Route::resource('/blogs', \App\Http\Controllers\BlogController::class);
+
+Route::get('/jawa-timur', function () {
+    return view('pages/laporan/jawa-timur');
+});
+
+Route::get('/jawa-barat', function () {
+    return view('pages/laporan/jawa-barat');
+});
+
+Route::get('/jawa-tengah', function () {
+    return view('pages/laporan/jawa-tengah');
+});
+
+Route::get('/kalimantan', function () {
+    return view('pages/laporan/kalimantan');
+});
+
+Route::get('/sumatera', function () {
+    return view('pages/laporan/sumatera
+    ');
+});
+
+Route::get('/sulawesi', function () {
+    return view('pages/laporan/sulawesi');
+});
 
 });
 

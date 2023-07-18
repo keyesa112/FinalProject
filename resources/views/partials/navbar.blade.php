@@ -27,13 +27,11 @@
       </a>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="/index#contact">Beranda</a></li>
+          <li><a href="/index#">Beranda</a></li>
           <li><a href="/index#about">Profil</a></li>
 
           <!-- LAPORAN --> 
-          <li class="dropdown"><a href="/index#services">Laporkan<i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul> <li><a href="/blogs">Histori Laporanmu</a></li></ul>
-          </li>
+          <li><a href="/index#services">Laporkan</a></li>
           
          <!-- BERITA --> 
           <li class="dropdown"><a href="#"><span>Berita Kebencanaan</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -44,13 +42,8 @@
             </ul>
           </li>
 
-          <li class="dropdown"><a href="#"><span>Menu {{ Auth::user()->level }}</span><i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="#"><span>Menu</span><i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              @if (auth()->user()->level=="admin")
-                  <li><a href="/admin">Admin</a></li>
-                  <li><a href="/users">Users</a></li>
-                  <li><a href="/histori">Histori Laporan User</a></li>
-              @endif
               @guest
               @if (Route::has('login'))
                   <li class="nav-item">
@@ -64,6 +57,15 @@
                   </li>
               @endif
           @else
+
+          @if (auth()->user()->level=="admin")
+          <li><a href="/admin">Admin</a></li>
+          <li><a href="/users">Users</a></li>
+          <li><a href="/histori">Histori Laporan User</a></li>
+          @else
+          <li><a href="/blogs">Histori Laporanmu</a></li>
+          @endif
+
               <li class="nav-item dropdown">
                   <a id="navbarDropdown" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre href="{{ route('logout') }}"
                   onclick="event.preventDefault();
